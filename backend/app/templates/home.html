@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webapp Django Cơ Bản</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chào mừng đến với Webapp Django!</h1>
+    
+    <h2>Danh sách các mục:</h2>
+    {% if items %}
+        {% for item in items %}
+            <div class="item">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description }}</p>
+                <small>Tạo lúc: {{ item.created_at }}</small>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Chưa có mục nào.</p>
+    {% endif %}
+</body>
+</html>
