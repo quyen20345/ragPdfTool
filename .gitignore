@@ -1,3 +1,6 @@
 /venv
 /rag_model/models
 /rag_model/data
+/backend/app/__pycache__
+/backend/app/migrations/__pycache__
+/backend/config/__pycache__

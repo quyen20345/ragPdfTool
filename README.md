@@ -1,6 +1,7 @@
 # R-book
+## Setup venv
 python -m venv venv
+## Run venv
 source venv/bin/activate
-pip install django
-django-admin startproject app
+## Run backend
 python manage.py runserver
