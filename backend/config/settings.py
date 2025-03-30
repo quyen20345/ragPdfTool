@@ -55,8 +55,10 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [
+            "../frontend", # add path to frontend templates directory
+        ],
+        'APP_DIRS': False, # True is default, but we set it to False to avoid searching in app directories
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
