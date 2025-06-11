@@ -8,3 +8,4 @@ sentence-transformers==3.4.1
 gpt4all==2.8.2
 faiss-cpu==1.10.0
 openai==1.68.2
+flask

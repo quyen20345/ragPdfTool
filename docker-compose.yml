@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend:/app
+    environment:
+      - FLASK_APP=app
+      - FLASK_ENV=development
+    depends_on:
+      - rag_model
+
+  rag_model:
+    build: ./rag_model
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./rag_model:/app
