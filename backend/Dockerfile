@@ -1,13 +1,15 @@
-FROM python:3.9-slim
+# Dựa trên Python 3
+FROM python:3.10-slim
 
+# Work directory in Image
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
+# Copy the codes into container
 COPY . .
 
-ENV FLASK_APP=app
-ENV FLASK_ENV=development
+# install libraries
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5001"] 
+# run the app with gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:create_app()"]

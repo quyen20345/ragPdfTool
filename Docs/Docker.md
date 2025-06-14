@@ -1,4 +1,4 @@
-### build image
-docker build -t backend . 
-### run container
-docker run -p 8000:8000 backend
+## build and run docker image
+> - sudo docker build -t flask-backend .
+> - sudo docker run -p 5000:5000 flask-backend
+

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from qabot import QABot
+from rag_model.src.qabot import QABot
 import os
 
 app = Flask(__name__)
