@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head>
+    <title>RAG Q&A</title>
+</head>
+<body>
+    <h1>Hoi dap tai lieu</h1>
+    <form action="/ask" method="post">
+        <input type="text" name="question" placeholder="Enter your question..." size="50">
+        <button type="submit">question</button>
+    </form>
+    {% if answer %}
+    <h2>answer:</h2>
+    <p>{{ answer }}</p>
+    {% endif %}
+</body>
+{% endblock %}
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>RAG Q&A</title>
+</head>
+<body>
+    <h1>Hoi dap tai lieu</h1>
+    <form action="/ask" method="post">
+        <input type="text" name="question" placeholder="Enter your question..." size="50">
+        <button type="submit">question</button>
+    </form>
+    {% if answer %}
+    <h2>answer:</h2>
+    <p>{{ answer }}</p>
+    {% endif %}
+</body>
+</html> -->

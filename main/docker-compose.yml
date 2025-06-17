@@ -1,0 +1,17 @@
+services:
+  rag_tool:
+    container_name: rag_tool_container
+    image: rag_tool_image
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app/app
+      - ./rag_model:/app/rag_model
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FLASK_APP=app
+      - FLASK_ENV=development
+    command: gunicorn main:app --bind 0.0.0.0:5000
+
+

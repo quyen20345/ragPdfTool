@@ -1,0 +1,16 @@
+flask==3.0.2
+requests==2.31.0
+python-dotenv==1.0.0
+flask-cors==4.0.0
+gunicorn==21.2.0 # The Gunicorn "Green Unicorn is a Python Web Server Gateway Interface (WSGI) HTTP server
+
+ctransformers==0.2.27
+transformers==4.50.1
+langchain==0.3.21
+langchain-community==0.3.20
+torch==2.6.0
+pypdf==5.4.0
+sentence-transformers==3.4.1
+gpt4all==2.8.2
+faiss-cpu==1.10.0
+openai==1.68.2
