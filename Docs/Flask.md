@@ -1,5 +1,5 @@
-## Blueprint
-> ## What is the Blueprint?
-> - Blueprint là một cách để chia nhỏ ứng dụng Flask thành các phần (modules) riêng biệt. 
-> - Example: 
-## 
+## [Flask Blueprints](https://www.geeksforgeeks.org/python/flask-blueprints/)
+
+##  [Templating With Jinja2 in Flask](https://www.geeksforgeeks.org/python/templating-with-jinja2-in-flask/)
+
+## Flask - HTTP Method

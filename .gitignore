@@ -4,3 +4,4 @@
 /main/rag_model/src/vectorstores/db_faiss 
 /main/rag_model/src/__pycache__
 /main/app/__pycache__
+/main/app/routes/__pycache__
