@@ -6,8 +6,8 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./app:/app/app
-      - ./rag_model:/app/rag_model
+      - ./app:/app/app # bind mount for the app directory
+      - ./rag_model:/app/rag_model # bind mount for the rag_model directory
     environment:
       - PYTHONUNBUFFERED=1
       - FLASK_APP=app
