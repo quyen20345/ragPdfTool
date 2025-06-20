@@ -10,9 +10,12 @@
         <input type="text" name="question" placeholder="Enter your question..." size="50">
         <button type="submit">question</button>
     </form>
+
     {% if answer %}
     <h2>answer:</h2>
     <p>{{ answer }}</p>
+    {% elif request.method == 'POST' %}
+        <p>Processing your question...</p>
     {% endif %}
 </body>
 {% endblock %}

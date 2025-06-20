@@ -65,11 +65,6 @@ prompt = creat_prompt(template)
 
 llm_chain  =create_qa_chain(prompt, llm, db)
 
-# Chay cai chain
-# question = "What is the Attention?"
-# response = llm_chain.invoke({"query": question})
-# print(response)
-
 # chay khi run truc tiep file
 if __name__ == "__main__":
     question = "What is the Attention?"
