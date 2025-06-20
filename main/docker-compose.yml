@@ -12,6 +12,6 @@ services:
       - PYTHONUNBUFFERED=1
       - FLASK_APP=app
       - FLASK_ENV=development
-    command: gunicorn main:app --bind 0.0.0.0:5000
+    command: gunicorn main:app --bind 0.0.0.0:5000 --timeout 300
 
 
