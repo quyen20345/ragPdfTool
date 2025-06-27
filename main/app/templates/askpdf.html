@@ -8,6 +8,14 @@
     <h1>Ask with RAG</h1> 
     <form action="/rag/askpdf" method="POST">
         <input type="text" name="question" placeholder="Enter your question..." size="50">
+
+        <div class="form-group">
+            <select name="model" class="form-control">
+                <option value="gemini-2.0">Gemini 2.0</option>
+                <option value="vinallama-7b">VinaLLaMA 7B</option>
+            </select>
+        </div>
+
         <button type="submit">question</button>
     </form>
 

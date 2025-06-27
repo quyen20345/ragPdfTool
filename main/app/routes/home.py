@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify # request: lay du lieu tu client gui len, jsonify: chuyen du lieu thanh json
-from rag_model.src.qabot import llm_chain # llm_chain: la ham tuong tac vs model de tra loi cau hoi
+from rag_model.src.vinallamaQA import llm_chain # llm_chain: la ham tuong tac vs model de tra loi cau hoi
 
 home_bp = Blueprint('home', __name__)
 

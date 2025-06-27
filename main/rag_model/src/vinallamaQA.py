@@ -5,6 +5,7 @@ from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_community.vectorstores import FAISS
 import os
 from pathlib import Path
+from .rag_utils import load_vector_db
 
 # Base dir: thư mục hiện tại chứa file đang chạy (vd: qabot.py)
 base_dir = Path(__file__).resolve().parent
@@ -42,20 +43,7 @@ def create_qa_chain(prompt, llm, db):
     )
     return llm_chain
 
-# Read tu VectorDB
-def read_vectors_db():
-    base_dir = Path(__file__).resolve().parent
-    vector_db_path = base_dir / "vectorstores" / "db_faiss"
-    base_dir = Path(__file__).resolve().parent
-    model_path = base_dir / "models" / "models/all-MiniLM-L6-v2-f16.gguf"
-    # Embeding
-    embedding_model = GPT4AllEmbeddings(model_file=model_path, allow_download=False) 
-    db = FAISS.load_local(vector_db_path, embedding_model, allow_dangerous_deserialization=True)
-    return db
-
-
-# Bat dau thu nghiem
-db = read_vectors_db()
+db = load_vector_db()
 llm = load_llm(str(model_file))
 
 #Tao Prompt
@@ -63,7 +51,7 @@ template = """<|im_start|>system\nUse the following information to answer the qu
     {context}<|im_end|>\n<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant"""
 prompt = creat_prompt(template)
 
-llm_chain  =create_qa_chain(prompt, llm, db)
+llm_chain  = create_qa_chain(prompt, llm, db)
 
 # chay khi run truc tiep file
 if __name__ == "__main__":
