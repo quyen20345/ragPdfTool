@@ -5,3 +5,5 @@
 /main/rag_model/src/__pycache__
 /main/app/__pycache__
 /main/app/routes/__pycache__
+/main/__pycache__
+/main/rag_model/__pycache__

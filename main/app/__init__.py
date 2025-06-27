@@ -8,5 +8,5 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')  # All routes in auth_bp will be prefixed with '/auth'
     app.register_blueprint(profile_bp, url_prefix='/profile')
     app.register_blueprint(askpdf_bp, url_prefix='/rag')
-    
+
     return app

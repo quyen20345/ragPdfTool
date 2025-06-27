@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, jsonify
+from flask import Blueprint, request, render_template
 from rag_model.src.vinallamaQA import llm_chain
 from rag_model.src.geminiQA import ask_with_gemini
 import logging

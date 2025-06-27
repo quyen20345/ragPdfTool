@@ -15,6 +15,6 @@ gpt4all==2.8.2
 faiss-cpu==1.10.0
 openai==1.68.2
 
-langchain-text-splitters==0.1.0 
+langchain-text-splitters
 langchain[google-genai] # Có thể sử dụng GoogleGenerativeAIEmbeddings, GoogleChatModel và nhiều hàm khác trong LangChain để gọi đến mô hình Gemini
 langchain-google-genai

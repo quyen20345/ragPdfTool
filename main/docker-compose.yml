@@ -6,12 +6,13 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./app:/app/app # bind mount for the app directory
-      - ./rag_model:/app/rag_model # bind mount for the rag_model directory
+      - .:/app
+      # - ./app:/app/app # bind mount for the app directory
+      # - ./rag_model:/app/rag_model # bind mount for the rag_model directory
     environment:
       - PYTHONUNBUFFERED=1
       - FLASK_APP=app
       - FLASK_ENV=development
-    command: gunicorn main:app --bind 0.0.0.0:5000 --timeout 300
+    command: gunicorn --reload main:app --bind 0.0.0.0:5000 --timeout 300
 
 

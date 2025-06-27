@@ -23,11 +23,11 @@
 import os
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage
-from .rag_utils import load_vector_db  # import FAISS retriever
+from .rag_utils import load_vector_db, create_db_from_files  # import FAISS retriever
 
 # API key
 if not os.environ.get("GOOGLE_API_KEY"):
-    os.environ["GOOGLE_API_KEY"] = "AIzaSyDaOTajq9YRNRvNE7bIPYOv568CP4WNO0A"  # bạn đã có rồi
+    os.environ["GOOGLE_API_KEY"] = "AIzaSyDaOTajq9YRNRvNE7bIPYOv568CP4WNO0A"  # 
 
 # Load Gemini model
 model = init_chat_model("gemini-2.0-flash", model_provider="google_genai")
@@ -58,7 +58,7 @@ def ask_with_gemini(question: str):
     response = model.invoke([HumanMessage(content=prompt)])
     return {"result": response.content}
 
-# Test
+# Test 
 if __name__ == "__main__":
     q = input("Nhập câu hỏi: ")
     r = ask_with_gemini(q)
