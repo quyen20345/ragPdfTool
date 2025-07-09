@@ -1,0 +1,31 @@
+version: "3.9" # Version cua docker 
+
+services: # list cac containers trong project can chay
+  backend: 
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8000:8000" # Port backend
+    volumes: 
+      - ./backend:/api # Mount thu muc backend vao container
+    networks:
+      - app-network
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000" # Port frontend
+    volumes:
+      - ./frontend:/app # Mount thu muc frontend vao container
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    # bridge network la mang noi bo (virtual network) tren cung may host de ket noi cac container voi nhau
+    driver: bridge
+

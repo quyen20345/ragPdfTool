@@ -1,9 +1,3 @@
-/venv
-/test_rag_model
-/main/rag_model/src/models
-/main/rag_model/src/vectorstores/db_faiss 
-/main/rag_model/src/__pycache__
-/main/app/__pycache__
-/main/app/routes/__pycache__
-/main/__pycache__
-/main/rag_model/__pycache__
+/backend/venv
+/backend/rag_model
+/backend/__pycache__
