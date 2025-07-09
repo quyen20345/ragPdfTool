@@ -16,7 +16,7 @@ model_file = base_dir / "models" / "vinallama-7b-chat_q5_0.gguf"
 vector_db_path = "vectorstores/db_faiss"
 
 # Load LLM
-def load_llm(model_file):
+def load_llm(model_file: str) -> CTransformers:
     llm = CTransformers(
         model=model_file,
         model_type="llama",
@@ -26,13 +26,13 @@ def load_llm(model_file):
     return llm
 
 # Tao prompt template
-def creat_prompt(template):
-    prompt = PromptTemplate(template = template, input_variables=["context", "question"])
+def creat_prompt(template: str) -> PromptTemplate:
+    prompt = PromptTemplate(template=template, input_variables=["context", "question"])
     return prompt
 
 
 # Tao simple chain
-def create_qa_chain(prompt, llm, db):
+def create_qa_chain(prompt: PromptTemplate, llm: CTransformers, db: FAISS) -> RetrievalQA:
     llm_chain = RetrievalQA.from_chain_type(
         llm = llm,
         chain_type= "stuff",
@@ -49,9 +49,9 @@ llm = load_llm(str(model_file))
 #Tao Prompt
 template = """<|im_start|>system\nUse the following information to answer the question. If you don't know the answer, say you don't know, don't try to make up the answer.\n
     {context}<|im_end|>\n<|im_start|>user\n{question}<|im_end|>\n<|im_start|>assistant"""
-prompt = creat_prompt(template)
+prompt = creat_prompt(template=template)
 
-llm_chain  = create_qa_chain(prompt, llm, db)
+llm_chain  = create_qa_chain(prompt=prompt, llm=llm, db=db)
 
 # chay khi run truc tiep file
 if __name__ == "__main__":
