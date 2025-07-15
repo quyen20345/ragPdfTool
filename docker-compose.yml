@@ -20,12 +20,28 @@ services: # list cac containers trong project can chay
     ports:
       - "3000:3000" # Port frontend
     volumes:
-      - ./frontend:/app # Mount thu muc frontend vao container
+    - ./frontend:/app
+    - /app/node_modules
     networks:
       - app-network
+  
+  ollama:
+    build:
+      context: ./ollama
+    container_name: ollama-server
+    image: ollama-server
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    networks:
+      - app-network
+    entrypoint: ["sh", "/pull.sh"]
 
 networks:
   app-network:
     # bridge network la mang noi bo (virtual network) tren cung may host de ket noi cac container voi nhau
     driver: bridge
 
+volumes:
+  ollama-data:
