@@ -6,6 +6,10 @@ class ChatRequest(BaseModel):
         default="How to write a Python function?"
     )
 
+    context: Optional[str] = Field(
+        default=""
+    )
+
 class ChatResponse(BaseModel):
     response: str
     model: str
@@ -13,3 +17,10 @@ class ChatResponse(BaseModel):
 class Message(BaseModel):
     role: str
     content: str
+
+
+# test schema
+class Person(BaseModel):
+    id: int
+    name: str
+    age: int

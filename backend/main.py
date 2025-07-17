@@ -11,6 +11,9 @@ from langchain_core.caches import InMemoryCache
 from langchain_core.globals import set_llm_cache
 from langchain_core.output_parsers import StrOutputParser
 
+from app.db import *
+from langchain.sql_database import SQLDatabase # cơ sở dữ liệu
+
 # Initialize FastAPI App
 app = FastAPI()
 
@@ -44,8 +47,12 @@ template = PromptTemplate.from_template(
     {context}
     User's question:
     {question}
+
+    {context_db}
     """
 )
+
+db = SQLDatabase(engine=engine)
 
 # Create the LLM chain with the prompt template
 # https://python.langchain.com/api_reference/langchain/chains/langchain.chains.llm.LLMChain.html
@@ -53,19 +60,35 @@ llm_chain = (
     template | llm | StrOutputParser()
 )
 
+@app.on_event("startup")
+def connect_db():
+    create_tables()
 
 @app.post("/prompt")
-def prompt(chat_request: ChatRequest)-> dict:
+def prompt(chat_request: ChatRequest, session_db: SessionDeps)-> dict:
     print("chat_request:", chat_request.prompt)
 
     if llm is None:
         return {"error": "LLM not initialized."}
 
     try:
+        context_db = f"You are a helpful assistant. You can answer questions based on the context provided.{db.get_table_info(db.get_usable_table_names())}"
+        print("context_db:", context_db)
         result = llm_chain.invoke({
             "context": chat_request.context or "",
+            "context_db": context_db,
             "question": chat_request.prompt
         })
+
+            # Save the chat request and result to the database
+        session_db.add(
+            DataChat(
+                prompt=chat_request.prompt,
+                result=result
+            )
+        )
+
+        session_db.commit()
         return {
             "received_prompt": chat_request.prompt,
             "result": result
