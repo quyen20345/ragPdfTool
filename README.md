@@ -71,11 +71,13 @@ npm i axios       # Cài axios để gọi API
 ---
 
 ## 📦 Tài nguyên bổ trợ
+### [Milvus docker](https://milvus.io/docs/install_standalone-docker.md#Install-Milvus-standalone-using-Docker-Compose)
+* https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml
+### [Explore Attu, an open-source GUI tool for intuitive Milvus management.](https://milvus.io/docs/install_standalone-docker-compose.md#:~:text=Explore%20Attu%2C%20an%20open%2Dsource%20GUI%20tool%20for%20intuitive%20Milvus%20management.)
+* https://github.com/zilliztech/attu
+### [How-to guides with Langchain](https://python.langchain.com/docs/how_to/)
+### [ollama](https://ollama.readthedocs.io/en/api/)
 
-* 🔗 [How-to guides with Langchain](https://python.langchain.com/docs/how_to/)
-* 🔗 [Bootstrap 3.3 Getting Started](https://getbootstrap.com/docs/3.3/getting-started/#download)
-* 🔗 [Custom Login/Registration/Forgot Password Snippets](https://bootsnipp.com/snippets/X04B0)
-* 🔗 [ollama](https://ollama.readthedocs.io/en/api/)
 ---
 
 ## 🤖 Mô hình tải từ Hugging Face

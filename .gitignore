@@ -1,3 +1,6 @@
 /backend/venv
 /backend/rag_model
 /backend/__pycache__
+/backend/app/__pycache__
+/backend/app/data
+/volumes
