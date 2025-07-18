@@ -45,10 +45,11 @@ set_llm_cache(cache)
 template = PromptTemplate.from_template( 
     """
     {context}
-    User's question:
-    {question}
 
     {context_db}
+
+    User's question:
+    {question}
     """
 )
 
@@ -60,9 +61,11 @@ llm_chain = (
     template | llm | StrOutputParser()
 )
 
+# Startup event to create the database and tables before the app starts.
+# https://fastapi.tiangolo.com/advanced/events/#alternative-events-deprecated:~:text=.-,startup,event,-%C2%B6
 @app.on_event("startup")
 def connect_db():
-    create_tables()
+    create_db_and_tables() # create the database and tables.
 
 @app.post("/prompt")
 def prompt(chat_request: ChatRequest, session_db: SessionDeps)-> dict:
@@ -80,14 +83,16 @@ def prompt(chat_request: ChatRequest, session_db: SessionDeps)-> dict:
             "question": chat_request.prompt
         })
 
-            # Save the chat request and result to the database
+        # add the rows to the database with the session
+        # https://sqlmodel.tiangolo.com/tutorial/insert/#create-data-with-python-and-sqlmodel:~:text=to%20the%20database-,Create%20a%20Model%20Instance,-%C2%B6
         session_db.add(
             DataChat(
                 prompt=chat_request.prompt,
                 result=result
             )
         )
-
+        # commit the changes to the database
+        # https://sqlmodel.tiangolo.com/tutorial/insert/#add-model-instances-to-the-session:~:text=a%20broken%20state.-,Commit%20the%20Session%20Changes,-%C2%B6
         session_db.commit()
         return {
             "received_prompt": chat_request.prompt,

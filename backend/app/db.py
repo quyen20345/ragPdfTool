@@ -7,12 +7,18 @@ class DataChat(SQLModel, table=True):
     prompt: str
     result: str
 
+# engine database URL
+# https://sqlmodel.tiangolo.com/tutorial/create-db-and-table/#create-the-engine:~:text=about%20it%20later.-,Engine%20Database%20URL,-%C2%B6
 rel_db_path = "./db.sqlite3"
 file_path_sqlite = f"sqlite:///{rel_db_path}"
 
-engine = create_engine(file_path_sqlite, echo=True)
+# engine is an object that handles the communication with the database 
+# https://sqlmodel.tiangolo.com/tutorial/create-db-and-table/#create-the-engine:~:text=value%20here.-,Create%20the%20Engine,-%C2%B6
+engine = create_engine(file_path_sqlite, echo=True) 
 
-def create_tables():
+# create the tables in the database.
+# https://sqlmodel.tiangolo.com/tutorial/create-db-and-table/#engine-technical-details:~:text=and%20inline%20errors.-,Create%20the%20Database%20and%20Table,%C2%B6,-Now%20everything%20is
+def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 def get_session():

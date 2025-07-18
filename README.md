@@ -1,7 +1,41 @@
 # 📘 ragPdfTool
 
 Dự án này sử dụng kiến trúc microservice gồm **backend (FastAPI)** và **frontend (React)**. Docker được sử dụng để đóng gói và triển khai dễ dàng.
+---
+## Hướng dẫn chạy dự án.
+- cài đặt sẵn docker vs docker compose.
+- clone dự án trên github về.
+- cd vào thư mục song song với docker-compose.yml
+- sudo docker compose up
 
+---
+## (Type hints cheat sheet)[https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html]
+```python
+# Variables
+age: int = 22
+salary: int 
+...
+
+# Useful built-in types
+# collections
+x: List[int] = [1]
+x: Set[int] = {6,7}
+x: Dict[str, float] = {"field": 3.0}
+x: Tuple[int, str, float] = (3, "yes", 8.0)
+x: Tuple[int, ...] = (1, 2, 3)
+
+# Union vs Optional
+Uinon[int, str] mean a variable maybe "int" or "str"
+Optional[int] mean a variable maybe "int" or "None"
+Optional[int] similar Union[int, None]
+
+# Functions
+def stringify(num: int) -> str:
+   return str(num)
+
+def show_name(name: str) -> None:
+   print(f"my name is {name}")
+```
 ---
 
 ## 🛠 Xử lý lỗi cổng (port)
@@ -12,6 +46,9 @@ sudo kill -9 <PID>        # Dừng tiến trình chiếm cổng
 ```
 ---
 ## [Building Full Stack Applications With Python and ReactJS](https://www.youtube.com/watch?v=Jx39roFmTNg)
+```text
+- sử dụng docker để connect giữa frontend và backend
+```
 
 ---
 
