@@ -9,7 +9,9 @@ Dự án này sử dụng kiến trúc microservice gồm **backend (FastAPI)** 
 - sudo docker compose up
 
 ---
-## (Type hints cheat sheet)[https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html]
+
+---
+## [Type hints cheat sheet](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
 ```python
 # Variables
 age: int = 22
@@ -73,7 +75,7 @@ npm i axios       # Cài axios để gọi API
 * 🔗 [How-to guides with Langchain](https://python.langchain.com/docs/how_to/)
 * 🔗 [Bootstrap 3.3 Getting Started](https://getbootstrap.com/docs/3.3/getting-started/#download)
 * 🔗 [Custom Login/Registration/Forgot Password Snippets](https://bootsnipp.com/snippets/X04B0)
-
+* 🔗 [ollama](https://ollama.readthedocs.io/en/api/)
 ---
 
 ## 🤖 Mô hình tải từ Hugging Face
