@@ -32,7 +32,7 @@ def create_db_from_files():
         drop_old=True
     )
     vectorstore.add_documents(documents=split_docs, ids=uuids)
-    print("✅ Vector DB đã tạo trong Milvus.")
+    print("Vector DB đã tạo trong Milvus.")
 
     return vectorstore
 

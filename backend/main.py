@@ -34,12 +34,6 @@ retriever = vector_db.as_retriever(search_kwargs={"k": 3})
 
 # Load the model
 try:
-    # llm = Ollama(
-    #     base_url="http://host.docker.internal:11434", # the request go to outside the ollama container, so the ollama model can be handled the request
-    #     # base_url="http://localhost:11434", # error: Connection refused - backend container failed to connect to host, so the resquest couldn't be handled by the ollama model 
-    #     model="qwen2.5-coder:0.5b",
-    #     temperature=0,
-    # )
     llm = OllamaLLM(
         model="qwen2.5-coder:0.5b",
         base_url="http://host.docker.internal:11434",
@@ -60,9 +54,7 @@ set_llm_cache(cache)
 template = PromptTemplate.from_template( 
     """
     {context}
-
     {context_db}
-
     User's question:
     {question}
     """
