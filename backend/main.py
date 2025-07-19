@@ -11,10 +11,26 @@ from langchain_core.globals import set_llm_cache
 from langchain_core.output_parsers import StrOutputParser
 
 from app.db import *
-from langchain.sql_database import SQLDatabase # cơ sở dữ liệu
+from langchain.sql_database import SQLDatabase
+
+# thu vien de load vector database
+from langchain.vectorstores import FAISS
+from langchain_community.embeddings import GPT4AllEmbeddings
+from pathlib import Path
+import os
 
 # Initialize FastAPI App
 app = FastAPI()
+
+# load the vector database
+path_faiss_index = "app/faiss_pdf_rag/vectorstores/db_faiss"
+# Base dir
+base_dir = Path(__file__).resolve().parent
+model_path = base_dir / "app" / "faiss_pdf_rag" / "models" / "models/all-MiniLM-L6-v2-f16.gguf"
+# embedding
+embedding_model = GPT4AllEmbeddings(model_file=model_path, allow_download=False) 
+vector_db = FAISS.load_local(path_faiss_index, embedding_model, allow_dangerous_deserialization=True)
+retriever = vector_db.as_retriever(search_kwargs={"k": 3})
 
 # Load the model
 try:
@@ -74,10 +90,14 @@ def prompt(chat_request: ChatRequest, session_db: SessionDeps)-> dict:
         return {"error": "LLM not initialized."}
 
     try:
+        # Truy vấn vector DB
+        docs = retriever.invoke(chat_request.prompt)
+        context_vector = "\n".join([doc.page_content for doc in docs])
+
         context_db = f"You are a helpful assistant. You can answer questions based on the context provided.{db.get_table_info(db.get_usable_table_names())}"
         print("context_db:", context_db)
         result = llm_chain.invoke({
-            "context": chat_request.context or "",
+            "context": chat_request.context or context_vector,
             "context_db": context_db,
             "question": chat_request.prompt
         })
