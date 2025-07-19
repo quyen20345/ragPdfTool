@@ -4,3 +4,4 @@
 /backend/app/__pycache__
 /backend/app/data
 /volumes
+/backend/app/faiss_pdf_rag/models/all-MiniLM-L6-v2-f16.gguf

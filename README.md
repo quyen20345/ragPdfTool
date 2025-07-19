@@ -11,42 +11,6 @@ Dự án này sử dụng kiến trúc microservice gồm **backend (FastAPI)** 
 ---
 
 ---
-## [Type hints cheat sheet](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
-```python
-# Variables
-age: int = 22
-salary: int 
-...
-
-# Useful built-in types
-# collections
-x: List[int] = [1]
-x: Set[int] = {6,7}
-x: Dict[str, float] = {"field": 3.0}
-x: Tuple[int, str, float] = (3, "yes", 8.0)
-x: Tuple[int, ...] = (1, 2, 3)
-
-# Union vs Optional
-Uinon[int, str] mean a variable maybe "int" or "str"
-Optional[int] mean a variable maybe "int" or "None"
-Optional[int] similar Union[int, None]
-
-# Functions
-def stringify(num: int) -> str:
-   return str(num)
-
-def show_name(name: str) -> None:
-   print(f"my name is {name}")
-```
----
-
-## 🛠 Xử lý lỗi cổng (port)
-
-```bash
-sudo lsof -i :8000        # Kiểm tra tiến trình chiếm cổng
-sudo kill -9 <PID>        # Dừng tiến trình chiếm cổng
-```
----
 ## [Building Full Stack Applications With Python and ReactJS](https://www.youtube.com/watch?v=Jx39roFmTNg)
 ```text
 - sử dụng docker để connect giữa frontend và backend
@@ -54,7 +18,7 @@ sudo kill -9 <PID>        # Dừng tiến trình chiếm cổng
 
 ---
 
-## 🌐 ReactJS Frontend
+## ReactJS Frontend
 
 ### Cài đặt và chạy ứng dụng React:
 
@@ -69,14 +33,26 @@ npm i axios       # Cài axios để gọi API
 > 🔗 [Getting Started with React](https://create-react-app.dev/docs/getting-started/)
 
 ---
+### [langchain milvus](https://python.langchain.com/docs/integrations/vectorstores/milvus/) vs docker milvus
+```text
+- Langchain milvus: xu ly cac tac vu client
+- docker milvus: server cua milvus duoc trien khai bang docker
+```
+
+---
 
 ## 📦 Tài nguyên bổ trợ
-### [Milvus docker](https://milvus.io/docs/install_standalone-docker.md#Install-Milvus-standalone-using-Docker-Compose)
+#### [Milvus docker](https://milvus.io/docs/install_standalone-docker.md#Install-Milvus-standalone-using-Docker-Compose)
 * https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml
-### [Explore Attu, an open-source GUI tool for intuitive Milvus management.](https://milvus.io/docs/install_standalone-docker-compose.md#:~:text=Explore%20Attu%2C%20an%20open%2Dsource%20GUI%20tool%20for%20intuitive%20Milvus%20management.)
+
+#### [langchain milvus](https://python.langchain.com/docs/integrations/vectorstores/milvus/)
+
+#### [Explore Attu, an open-source GUI tool for intuitive Milvus management.](https://milvus.io/docs/install_standalone-docker-compose.md#:~:text=Explore%20Attu%2C%20an%20open%2Dsource%20GUI%20tool%20for%20intuitive%20Milvus%20management.)
 * https://github.com/zilliztech/attu
-### [How-to guides with Langchain](https://python.langchain.com/docs/how_to/)
-### [ollama](https://ollama.readthedocs.io/en/api/)
+
+#### [How-to guides with Langchain](https://python.langchain.com/docs/how_to/)
+
+#### [ollama](https://ollama.readthedocs.io/en/api/)
 
 ---
 

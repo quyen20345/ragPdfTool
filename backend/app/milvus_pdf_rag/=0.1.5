@@ -1,0 +1,192 @@
+Using pip 24.2 from /usr/local/lib/python3.12/site-packages/pip (python 3.12)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/60/b1/54e176cc8ac80df9a2c4ee9f726d6383fcf9818317c68532cfc90fa91b6c/langchain_milvus-0.2.1-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.2.1-py3-none-any.whl.metadata (3.8 kB)
+Requirement already satisfied: langchain-core<0.4,>=0.2.38 in /usr/local/lib/python3.12/site-packages (from langchain-milvus) (0.3.69)
+Collecting pymilvus<3.0,>=2.5.7 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/98/e9/b32f5174b6877345e543ff93f7eac7069177089511a62e2c8c665d24dec1/pymilvus-2.5.13-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.13-py3-none-any.whl.metadata (5.7 kB)
+Requirement already satisfied: langsmith>=0.3.45 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (0.4.6)
+Requirement already satisfied: tenacity!=8.4.0,<10.0.0,>=8.1.0 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (9.1.2)
+Requirement already satisfied: jsonpatch<2.0,>=1.33 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (1.33)
+Requirement already satisfied: PyYAML>=5.3 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (6.0.2)
+Requirement already satisfied: typing-extensions>=4.7 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (4.14.1)
+Requirement already satisfied: packaging>=23.2 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (25.0)
+Requirement already satisfied: pydantic>=2.7.4 in /usr/local/lib/python3.12/site-packages (from langchain-core<0.4,>=0.2.38->langchain-milvus) (2.11.7)
+Collecting setuptools>69 (from pymilvus<3.0,>=2.5.7->langchain-milvus)
+  Obtaining dependency information for setuptools>69 from https://files.pythonhosted.org/packages/a3/dc/17031897dae0efacfea57dfd3a82fdd2a2aeb58e0ff71b77b87e44edc772/setuptools-80.9.0-py3-none-any.whl.metadata
+  Downloading setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting grpcio<=1.67.1,>=1.49.1 (from pymilvus<3.0,>=2.5.7->langchain-milvus)
+  Obtaining dependency information for grpcio<=1.67.1,>=1.49.1 from https://files.pythonhosted.org/packages/d1/94/16550ad6b3f13b96f0856ee5dfc2554efac28539ee84a51d7b14526da985/grpcio-1.67.1-cp312-cp312-musllinux_1_1_x86_64.whl.metadata
+  Downloading grpcio-1.67.1-cp312-cp312-musllinux_1_1_x86_64.whl.metadata (3.9 kB)
+Collecting protobuf>=3.20.0 (from pymilvus<3.0,>=2.5.7->langchain-milvus)
+  Obtaining dependency information for protobuf>=3.20.0 from https://files.pythonhosted.org/packages/f7/af/ab3c51ab7507a7325e98ffe691d9495ee3d3aa5f589afad65ec920d39821/protobuf-6.31.1-py3-none-any.whl.metadata
+  Downloading protobuf-6.31.1-py3-none-any.whl.metadata (593 bytes)
+Requirement already satisfied: python-dotenv<2.0.0,>=1.0.1 in /usr/local/lib/python3.12/site-packages (from pymilvus<3.0,>=2.5.7->langchain-milvus) (1.1.1)
+Collecting ujson>=2.0.0 (from pymilvus<3.0,>=2.5.7->langchain-milvus)
+  Obtaining dependency information for ujson>=2.0.0 from https://files.pythonhosted.org/packages/f2/2c/6990f4ccb41ed93744aaaa3786394bca0875503f97690622f3cafc0adfde/ujson-5.10.0-cp312-cp312-musllinux_1_2_x86_64.whl.metadata
+  Downloading ujson-5.10.0-cp312-cp312-musllinux_1_2_x86_64.whl.metadata (9.3 kB)
+Collecting pandas>=1.2.4 (from pymilvus<3.0,>=2.5.7->langchain-milvus)
+  Obtaining dependency information for pandas>=1.2.4 from https://files.pythonhosted.org/packages/50/b9/6e2d2c6728ed29fb3d4d4d302504fb66f1a543e37eb2e43f352a86365cdf/pandas-2.3.1-cp312-cp312-musllinux_1_2_x86_64.whl.metadata
+  Downloading pandas-2.3.1-cp312-cp312-musllinux_1_2_x86_64.whl.metadata (91 kB)
+INFO: pip is looking at multiple versions of pymilvus to determine which version is compatible with other requirements. This could take a while.
+Collecting pymilvus<3.0,>=2.5.7 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/68/4f/80a4940f2772d10272c3292444af767a5aa1a5bbb631874568713ca01d54/pymilvus-2.5.12-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.12-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/e7/2c/a9f2c2daff511e127616a4294e597bf4c7626d49865f62865432698c7ba9/pymilvus-2.5.11-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.11-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/b0/4b/847704930ad8ddd0d0975e9a3a5e3fe704f642debe97454135c2b9ee7081/pymilvus-2.5.10-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.10-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/9d/3c/f28eca6a607009f6a3f955efef3e0d6bf4584b2d41431a0e062bbc1d0969/pymilvus-2.5.9-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.9-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/6f/96/2ce2a0b601d95e373897eb2334f83dba615bd5647b0e4908ff30959920d2/pymilvus-2.5.8-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.8-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0,>=2.5.7 from https://files.pythonhosted.org/packages/32/64/2a7fc89c9ced385d2ad9257725ce3ad6445f8b9a45342648b10c3584c06d/pymilvus-2.5.7-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.7-py3-none-any.whl.metadata (5.7 kB)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/3c/34/8daa975a92daff9cda1125b1ce9b280d3954e886fa76f07eb87cafde6b9a/langchain_milvus-0.2.0-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.2.0-py3-none-any.whl.metadata (3.7 kB)
+INFO: pip is still looking at multiple versions of pymilvus to determine which version is compatible with other requirements. This could take a while.
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/93/ab/d321c9099ba395093b94d4cba6ba033f0d5e3e768ec096fe2f18dceab85d/langchain_milvus-0.1.10-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.10-py3-none-any.whl.metadata (3.7 kB)
+Collecting pymilvus<3.0.0,>=2.5.5 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.5 from https://files.pythonhosted.org/packages/06/4f/169ffe72bc628bf89be7770f2ef60f90fd73588c6ceb25d47f1bb00ade02/pymilvus-2.5.6-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.6-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.5 from https://files.pythonhosted.org/packages/e3/6d/836ae8c9fe32383bc54ae8296f9fb912ec0cb1da04076c8a0480bcb1bbd3/pymilvus-2.5.5-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.5-py3-none-any.whl.metadata (5.7 kB)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/fe/1f/59d4d93d108db41d14aeae7815f7465b478649b8bdf14860d51a2d45dc3f/langchain_milvus-0.1.9-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.9-py3-none-any.whl.metadata (1.9 kB)
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/ee/cf/0dfa7883a595c5a7b772f076c993c2c01b6d920519ea4d2a276ad3b84f1c/langchain_milvus-0.1.8-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.8-py3-none-any.whl.metadata (1.9 kB)
+Collecting pymilvus<3.0.0,>=2.5.0 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.0 from https://files.pythonhosted.org/packages/26/e6/1ba3cae7c723ecf9ede7a30c78824953afc2fe4bab5fce8ec5d8e233f541/pymilvus-2.5.4-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.4-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.0 from https://files.pythonhosted.org/packages/7e/ef/2a5682e02ef69465f7a50aa48fd9ac3fe12a3f653f51cbdc211a28557efc/pymilvus-2.5.3-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.3-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.0 from https://files.pythonhosted.org/packages/5f/89/3d036d8c68a58670296933e2660c8763b997857fc0ceb416bd916c9c8e61/pymilvus-2.5.2-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.2-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.0 from https://files.pythonhosted.org/packages/89/6d/60c77b2085fb33d8661ee22c2e4a21e15fb121c8f2dbc87dc43d60381b59/pymilvus-2.5.1-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.1-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.5.0 from https://files.pythonhosted.org/packages/01/f1/76af6c8e1481879f5e0c0d885ab899ab8869fd939b27ac7a0b6c3b3b4ebe/pymilvus-2.5.0-py3-none-any.whl.metadata
+  Downloading pymilvus-2.5.0-py3-none-any.whl.metadata (5.7 kB)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/e0/f1/7138884f3d691d5a4c79a026f9136a2eed146ee98fea46e3fe3a03c91259/langchain_milvus-0.1.7-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.7-py3-none-any.whl.metadata (1.9 kB)
+Collecting pymilvus<3.0.0,>=2.4.3 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/92/1d/00ff2f10c8fa0a7ac61a9e1121383fb0b8ebd9e0da97842bc1edc8773cda/pymilvus-2.4.15-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.15-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/01/a7/f3ca13c126e1c32105944d710fa419e022557b8cd1edddfb20d6b98da983/pymilvus-2.4.14-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.14-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/10/e7/de6778773934cd34e1a6fc1a9bd072d8aae475491dfadb8e7d27fd51212d/pymilvus-2.4.13-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.13-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/28/c0/83cc1208b7f816fadc344656dbb50a5fe5fecf49f7ceff4a2b26d5c6622d/pymilvus-2.4.12-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.12-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/1a/cf/4d56ee9c6746a4cac79d03413c4eec170cba46e602c8bd5fb33eb3a8314d/pymilvus-2.4.11-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.11-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/97/1f/9fc078e1f2a56d938c8de7d4f5226b36daef7af9f3a59c1259f0e9997425/pymilvus-2.4.10-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.10-py3-none-any.whl.metadata (5.7 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/0e/98/0d79ebcc04e8a469f796e644302edee4368927a268f11afc298b6bd76e1f/pymilvus-2.4.9-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.9-py3-none-any.whl.metadata (5.6 kB)
+Collecting grpcio>=1.49.1 (from pymilvus<3.0.0,>=2.4.3->langchain-milvus)
+  Obtaining dependency information for grpcio>=1.49.1 from https://files.pythonhosted.org/packages/3d/56/3898526f1fad588c5d19a29ea0a3a4996fb4fa7d7c02dc1be0c9fd188b62/grpcio-1.73.1-cp312-cp312-musllinux_1_1_x86_64.whl.metadata
+  Downloading grpcio-1.73.1-cp312-cp312-musllinux_1_1_x86_64.whl.metadata (3.8 kB)
+Collecting environs<=9.5.0 (from pymilvus<3.0.0,>=2.4.3->langchain-milvus)
+  Obtaining dependency information for environs<=9.5.0 from https://files.pythonhosted.org/packages/ca/5e/f0f217dc393372681bfe05c50f06a212e78d0a3fee907a74ab451ec1dcdb/environs-9.5.0-py2.py3-none-any.whl.metadata
+  Downloading environs-9.5.0-py2.py3-none-any.whl.metadata (14 kB)
+Collecting pymilvus<3.0.0,>=2.4.3 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/ca/4f/a4f19ecdb779e8923146244fe25d944b5c6b2900e1eac3b34284461a676c/pymilvus-2.4.8-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.8-py3-none-any.whl.metadata (5.6 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/2c/2f/0445d2b8c7947815d9392a15044a5406044f779eab4162e4b6428c3302a8/pymilvus-2.4.7-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.7-py3-none-any.whl.metadata (5.6 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/1b/41/af144715fc246ee2232e609bf93ab7cfd4b417e14087606fd6d93cce7336/pymilvus-2.4.6-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.6-py3-none-any.whl.metadata (5.6 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/2e/2a/08f642d40e4d0ff927e3a0252f03d883d4bf4b6d9a26c274e8136c25e03f/pymilvus-2.4.5-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.5-py3-none-any.whl.metadata (5.6 kB)
+Collecting grpcio<=1.63.0,>=1.49.1 (from pymilvus<3.0.0,>=2.4.3->langchain-milvus)
+  Obtaining dependency information for grpcio<=1.63.0,>=1.49.1 from https://files.pythonhosted.org/packages/47/3a/9e3b3a990bf1a1c8f6b96d755f889063caba96e672ae5d2b81321fc07b6a/grpcio-1.63.0-cp312-cp312-musllinux_1_1_x86_64.whl.metadata
+  Downloading grpcio-1.63.0-cp312-cp312-musllinux_1_1_x86_64.whl.metadata (3.2 kB)
+Collecting pymilvus<3.0.0,>=2.4.3 (from langchain-milvus)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/10/bb/c509f33df70463d26df4b12aa3d0df697da93da6e3dc0e4776199a0b5753/pymilvus-2.4.4-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.4-py3-none-any.whl.metadata (5.4 kB)
+  Obtaining dependency information for pymilvus<3.0.0,>=2.4.3 from https://files.pythonhosted.org/packages/42/0e/9ebddc3ee8b500cf6e9f36eb388efbc8bf28ba861a89f6648bdf1031608f/pymilvus-2.4.3-py3-none-any.whl.metadata
+  Downloading pymilvus-2.4.3-py3-none-any.whl.metadata (5.3 kB)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/40/3b/3c569901afe49ed944a3396834a8a72ed86473230231a2e2244ddb3497d4/langchain_milvus-0.1.6-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.6-py3-none-any.whl.metadata (1.9 kB)
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/7b/8b/9db881dc8c290f052ef00edc440a6c1d955d7114c737843d225d81231d5b/langchain_milvus-0.1.5-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.5-py3-none-any.whl.metadata (2.2 kB)
+  Link requires a different Python (3.12.7 not in: '>=3.7,<3.10'): https://files.pythonhosted.org/packages/99/f1/c00d6be56e1a718a3068079e3ec8ce044d7179345280f6a3f5066068af0d/scipy-1.6.2.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.7,<3.10)
+  Link requires a different Python (3.12.7 not in: '>=3.7,<3.10'): https://files.pythonhosted.org/packages/fe/fd/8704c7b7b34cdac850485e638346025ca57c5a859934b9aa1be5399b33b7/scipy-1.6.3.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.7,<3.10)
+  Link requires a different Python (3.12.7 not in: '>=3.7,<3.10'): https://files.pythonhosted.org/packages/bb/bb/944f559d554df6c9adf037aa9fc982a9706ee0e96c0d5beac701cb158900/scipy-1.7.0.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.7,<3.10)
+  Link requires a different Python (3.12.7 not in: '>=3.7,<3.10'): https://files.pythonhosted.org/packages/47/33/a24aec22b7be7fdb10ec117a95e1e4099890d8bbc6646902f443fc7719d1/scipy-1.7.1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.7,<3.10)
+  Link requires a different Python (3.12.7 not in: '>=3.7,<3.11'): https://files.pythonhosted.org/packages/0e/23/58c4f995475a2a97cb5f4a032aedaf881ad87cd976a7180c55118d105a1d/scipy-1.7.2.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.7,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.7,<3.11'): https://files.pythonhosted.org/packages/61/67/1a654b96309c991762ee9bc39c363fc618076b155fe52d295211cf2536c7/scipy-1.7.3.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.7,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.11'): https://files.pythonhosted.org/packages/c0/ad/e3c052ed4e0027a8abef0a5e8441a044427d252d17d9aee06d56e62fc698/scipy-1.8.0rc1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.11'): https://files.pythonhosted.org/packages/29/d2/151a54944b333e465f98804dced31dab1284f3c37b752b9cefa710b64681/scipy-1.8.0rc2.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.11'): https://files.pythonhosted.org/packages/e4/26/83dd1c6378513a6241d984bda9f08c512b6e35fff13fba3acc1b3c195f02/scipy-1.8.0rc3.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.11'): https://files.pythonhosted.org/packages/22/78/056cc43e7737811b6f50886788a940f852773dd9804f5365952805db9648/scipy-1.8.0rc4.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.11'): https://files.pythonhosted.org/packages/b4/a2/4faa34bf0cdbefd5c706625f1234987795f368eb4e97bde9d6f46860843e/scipy-1.8.0.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.11'): https://files.pythonhosted.org/packages/26/b5/9330f004b9a3b2b6a31f59f46f1617ce9ca15c0e7fe64288c20385a05c9d/scipy-1.8.1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.11)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.12'): https://files.pythonhosted.org/packages/87/82/8b9bf8bb8030f1eef281ad2af87cc648e06e4a4974c2b9201a57d991b12c/scipy-1.9.0rc1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.12)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.12'): https://files.pythonhosted.org/packages/5a/87/27f9ee75c32138d6eaabff2b91744c97a3fdbbbdd78948372dac93e0079f/scipy-1.9.0rc2.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.12)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.12'): https://files.pythonhosted.org/packages/57/72/484c38e5b814b48b41ac6432ef69077f2e7c8094925d3ce17bc3d61359b0/scipy-1.9.0rc3.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.12)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.12'): https://files.pythonhosted.org/packages/a8/e3/4ec401f609d34162b7023a09165da491630879e4cfa2336667fe2102cd06/scipy-1.9.0.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.12)
+  Link requires a different Python (3.12.7 not in: '>=3.8,<3.12'): https://files.pythonhosted.org/packages/db/af/16906139f52bc6866c43401869ce247662739ad71afa11c6f18505eb0546/scipy-1.9.1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:>=3.8,<3.12)
+  Link requires a different Python (3.12.7 not in: '<3.12,>=3.8'): https://files.pythonhosted.org/packages/a2/ce/2592c3b550cf8f68879d4ff2159f3c689ee6f032f8fc9059022074f7bd75/scipy-1.10.0rc1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:<3.12,>=3.8)
+  Link requires a different Python (3.12.7 not in: '<3.12,>=3.8'): https://files.pythonhosted.org/packages/6b/a3/7de758a32569e06877a6b298bdf7b529ce97a33c55deb2b1637b0162fd9d/scipy-1.10.0rc2.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:<3.12,>=3.8)
+  Link requires a different Python (3.12.7 not in: '<3.12,>=3.8'): https://files.pythonhosted.org/packages/d6/bd/2d13a273d95f7b7d9903c906c486040b0aebb85e008f93a5dd0891f21f1f/scipy-1.10.0.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:<3.12,>=3.8)
+  Link requires a different Python (3.12.7 not in: '<3.12,>=3.8'): https://files.pythonhosted.org/packages/84/a9/2bf119f3f9cff1f376f924e39cfae18dec92a1514784046d185731301281/scipy-1.10.1.tar.gz (from https://pypi.org/simple/scipy/) (requires-python:<3.12,>=3.8)
+Collecting scipy<2.0,>=1.9 (from langchain-milvus)
+  Obtaining dependency information for scipy<2.0,>=1.9 from https://files.pythonhosted.org/packages/86/e8/a60da80ab9ed68b31ea5a9c6dfd3c2f199347429f229bf7f939a90d96383/scipy-1.16.0-cp312-cp312-musllinux_1_2_x86_64.whl.metadata
+  Downloading scipy-1.16.0-cp312-cp312-musllinux_1_2_x86_64.whl.metadata (61 kB)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/48/6a/f341e60cf2edf93c7461d75796a557a7bac6851b089e9d4b1d0080bea372/langchain_milvus-0.1.4-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.4-py3-none-any.whl.metadata (2.1 kB)
+Collecting langchain-core<0.3.0,>=0.2.20 (from langchain-milvus)
+  Obtaining dependency information for langchain-core<0.3.0,>=0.2.20 from https://files.pythonhosted.org/packages/70/9b/b26405992d807a592ab3e7792f0eb2c2f71fe69111c972caf7786ba99199/langchain_core-0.2.43-py3-none-any.whl.metadata
+  Downloading langchain_core-0.2.43-py3-none-any.whl.metadata (6.2 kB)
+Collecting langchain-milvus
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/a5/63/1bcd34ffba4c008989c26169739a9f2a696bad818e1ee4af622abcaf4ee8/langchain_milvus-0.1.3-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.3-py3-none-any.whl.metadata (2.1 kB)
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/4a/c9/261aa6d7e8ccbbde0546345ca6c701b2416efb4a71c1c8b5ffb88caeccd4/langchain_milvus-0.1.2-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.2-py3-none-any.whl.metadata (1.9 kB)
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/8b/f1/712314959f466bf0b3249abe52001dc8a00a28abea9e25cc03a81b440fba/langchain_milvus-0.1.1-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.1-py3-none-any.whl.metadata (1.8 kB)
+  Obtaining dependency information for langchain-milvus from https://files.pythonhosted.org/packages/df/ae/21de761c86595c520e838a54737d3e6ea7a15bc15ca761e3c30735d97216/langchain_milvus-0.1.0-py3-none-any.whl.metadata
+  Downloading langchain_milvus-0.1.0-py3-none-any.whl.metadata (1.8 kB)
+
+The conflict is caused by:
+    pymilvus 2.5.13 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.12 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.11 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.10 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.9 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.8 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.7 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.6 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.5 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.4 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.3 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.2 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.1 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.5.0 depends on milvus-lite>=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.15 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.14 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.13 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.12 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.11 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.10 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.9 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.8 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.7 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.6 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.5 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.4 depends on milvus-lite<2.5.0 and >=2.4.0; sys_platform != "win32"
+    pymilvus 2.4.3 depends on milvus-lite<2.5.0 and >=2.4.0
+
+To fix this you could try to:
+1. loosen the range of package versions you've specified
+2. remove package versions to allow pip to attempt to solve the dependency conflict
+

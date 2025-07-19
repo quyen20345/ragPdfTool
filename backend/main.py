@@ -1,6 +1,5 @@
 
 from fastapi import FastAPI
-from langchain_ollama import OllamaLLM
 from pydantic import BaseModel
 from app.schema import (ChatRequest, Person)
 from typing import List
