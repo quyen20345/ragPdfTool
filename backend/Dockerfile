@@ -1,14 +1,25 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
-# Cài curl bằng apt
-RUN apt-get update && apt-get install -y curl && apt-get clean
+ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /api
+# 1. Cài đặt các tiện ích cần thiết
+RUN apt-get update && apt-get install -y \
+    curl git wget unzip nano vim libgl1 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY ./requirements.txt /api/requirements.txt
+# 2. Thư mục làm việc
+WORKDIR /home/backend
 
-RUN pip install --no-cache-dir --upgrade -r /api/requirements.txt
+# 3. Copy file requirements và cài đặt thư viện Python
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY . /api
+# 4. Copy toàn bộ mã nguồn vào container
+COPY . .
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# 5. Biến môi trường hỗ trợ log rõ ràng
+ENV PYTHONUNBUFFERED=1 \
+    UVICORN_CMD="uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+
+# 6. Khởi chạy FastAPI server
+CMD ["sh", "-c", "$UVICORN_CMD"]

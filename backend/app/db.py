@@ -1,28 +1,32 @@
 from sqlmodel import SQLModel, Field, create_engine, Session
-from typing import Optional, Annotated
-from fastapi import Depends 
+from typing import Optional, Annotated, Generator
+from fastapi import Depends
 
+# ----------------------------
+# Define Chat Table Schema
+# ----------------------------
 class DataChat(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True, index=True)
     prompt: str
     result: str
 
-# engine database URL
-# https://sqlmodel.tiangolo.com/tutorial/create-db-and-table/#create-the-engine:~:text=about%20it%20later.-,Engine%20Database%20URL,-%C2%B6
-rel_db_path = "./db.sqlite3"
-file_path_sqlite = f"sqlite:///{rel_db_path}"
+# ----------------------------
+# Setup SQLite Database
+# ----------------------------
+DATABASE_FILE = "./db.sqlite3"
+DATABASE_URL = f"sqlite:///{DATABASE_FILE}"
 
-# engine is an object that handles the communication with the database 
-# https://sqlmodel.tiangolo.com/tutorial/create-db-and-table/#create-the-engine:~:text=value%20here.-,Create%20the%20Engine,-%C2%B6
-engine = create_engine(file_path_sqlite, echo=True) 
+# Create SQLAlchemy engine
+engine = create_engine(DATABASE_URL, echo=False)
 
-# create the tables in the database.
-# https://sqlmodel.tiangolo.com/tutorial/create-db-and-table/#engine-technical-details:~:text=and%20inline%20errors.-,Create%20the%20Database%20and%20Table,%C2%B6,-Now%20everything%20is
+# Create database and table
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
-def get_session():
+# Dependency - Get DB session
+def get_session() -> Generator[Session, None, None]:
     with Session(engine) as session:
         yield session
 
+# Type alias for FastAPI dependency injection
 SessionDeps = Annotated[Session, Depends(get_session)]

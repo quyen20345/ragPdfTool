@@ -1,42 +1,51 @@
-
 from fastapi import FastAPI
 from pydantic import BaseModel
-from app.schema import (ChatRequest, Person)
-from typing import List
-# from langchain_community.llms import Ollama
-from langchain_ollama import OllamaLLM # thu vien langchain ollama du su dung llm
+from app.schema import ChatRequest
+from app.db import *
+
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.utilities import SQLDatabase
+
+from langchain_ollama import OllamaLLM
 from langchain_core.prompts import PromptTemplate
 from langchain_core.caches import InMemoryCache
 from langchain_core.globals import set_llm_cache
 from langchain_core.output_parsers import StrOutputParser
 
-from app.db import *
-from langchain.sql_database import SQLDatabase
-
-# thu vien de load vector database
-from langchain.vectorstores import FAISS
-from langchain_community.embeddings import GPT4AllEmbeddings
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
-# Initialize FastAPI App
+load_dotenv()
+
+# Initialize FastAPI
 app = FastAPI()
 
-# load the vector database
-path_faiss_index = "app/faiss_pdf_rag/vectorstores/db_faiss"
-# Base dir
+# Paths
 base_dir = Path(__file__).resolve().parent
-model_path = base_dir / "app" / "faiss_pdf_rag" / "models" / "models/all-MiniLM-L6-v2-f16.gguf"
-# embedding
-embedding_model = GPT4AllEmbeddings(model_file=model_path, allow_download=False) 
-vector_db = FAISS.load_local(path_faiss_index, embedding_model, allow_dangerous_deserialization=True)
+path_faiss_index = base_dir / "faiss_pdf_rag" / "vectorstores" / "db_faiss"
+
+# Load embedding model from Hugging Face
+embedding_model = HuggingFaceEmbeddings(
+    model_name=os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+)
+
+# Load FAISS vector database
+vector_db = FAISS.load_local("faiss_pdf_rag/db_faiss", embedding_model, allow_dangerous_deserialization=True)
+
+# vector_db = FAISS.load_local(
+#     str(path_faiss_index), 
+#     embedding_model, 
+#     allow_dangerous_deserialization=True
+# )
 retriever = vector_db.as_retriever(search_kwargs={"k": 3})
 
-# Load the model
+# Initialize Ollama LLM
 try:
     llm = OllamaLLM(
-        model="qwen2.5-coder:0.5b",
-        base_url="http://host.docker.internal:11434",
+        model=os.getenv("OLLAMA_MODEL"),
+        base_url=os.getenv("OLLAMA_HOST"),
         temperature=0,
     )
     print("LLM initialized successfully.")
@@ -44,82 +53,71 @@ except Exception as e:
     print("Error initializing LLM:", e)
     llm = None
 
+# Set up cache
+set_llm_cache(InMemoryCache())
 
-# Initialize the in-memory cache for LLMs
-cache = InMemoryCache()
-set_llm_cache(cache)
-
-# Define the prompt template
-# https://mirascope.com/blog/langchain-prompt-template#prompttemplate-simple-string-based-prompts:~:text=a%20conversation%20history).-,PromptTemplate,%3A%20Simple%20String%2DBased%20Prompts,-This%20generates%20prompts
-template = PromptTemplate.from_template( 
+# Prompt template
+template = PromptTemplate.from_template(
     """
+    Bạn là một chatbot trả lời câu hỏi dựa vào ngữ cảnh dưới. 
+    Trả lời bằng tiếng việt.
+    Dữ liệu từ file pdf:
     {context}
+    Lịch sử chat:
     {context_db}
-    User's question:
+    Câu hỏi của người dùng:
     {question}
     """
 )
 
+# LangChain LLM chain
+llm_chain = template | llm | StrOutputParser()
+
+# SQL Database (for storing chat logs)
 db = SQLDatabase(engine=engine)
 
-# Create the LLM chain with the prompt template
-# https://python.langchain.com/api_reference/langchain/chains/langchain.chains.llm.LLMChain.html
-llm_chain = (
-    template | llm | StrOutputParser()
-)
-
-# Startup event to create the database and tables before the app starts.
-# https://fastapi.tiangolo.com/advanced/events/#alternative-events-deprecated:~:text=.-,startup,event,-%C2%B6
+# App startup: Create tables
 @app.on_event("startup")
-def connect_db():
-    create_db_and_tables() # create the database and tables.
+def startup_event():
+    create_db_and_tables()
 
+# Chat endpoint
 @app.post("/prompt")
-def prompt(chat_request: ChatRequest, session_db: SessionDeps)-> dict:
-    print("chat_request:", chat_request.prompt)
-
+def prompt(chat_request: ChatRequest, session_db: SessionDeps) -> dict:
     if llm is None:
         return {"error": "LLM not initialized."}
-
+    
     try:
-        # Truy vấn vector DB
+        # Get context from FAISS
         docs = retriever.invoke(chat_request.prompt)
         context_vector = "\n".join([doc.page_content for doc in docs])
 
-        context_db = f"You are a helpful assistant. You can answer questions based on the context provided.{db.get_table_info(db.get_usable_table_names())}"
-        print("context_db:", context_db)
+        # SQL schema info as context
+        context_db = f"You are a helpful assistant. You can answer questions based on the context provided.\n{db.get_table_info(db.get_usable_table_names())}"
+        
+        # Generate response
         result = llm_chain.invoke({
             "context": chat_request.context or context_vector,
             "context_db": context_db,
             "question": chat_request.prompt
         })
 
-        # add the rows to the database with the session
-        # https://sqlmodel.tiangolo.com/tutorial/insert/#create-data-with-python-and-sqlmodel:~:text=to%20the%20database-,Create%20a%20Model%20Instance,-%C2%B6
+        # Save to database
         session_db.add(
-            DataChat(
-                prompt=chat_request.prompt,
-                result=result
-            )
+            DataChat(prompt=chat_request.prompt, result=result)
         )
-        # commit the changes to the database
-        # https://sqlmodel.tiangolo.com/tutorial/insert/#add-model-instances-to-the-session:~:text=a%20broken%20state.-,Commit%20the%20Session%20Changes,-%C2%B6
         session_db.commit()
+
         return {
             "received_prompt": chat_request.prompt,
             "result": result
         }
+
     except Exception as e:
-        print("Error invoking LLM:", e)
+        print("Error:", e)
         return {"error": str(e)}
 
-
-# test
-@app.get("/api")
-def read_root()-> List[Person]:
-    DB = [
-       Person(id=1, name="Alice", age=25),
-       Person(id=2, name="Bob", age=30),
-       Person(id=3, name="Charlie", age=22)
-  ]
-    return DB
+# Health check
+@app.get("/")
+def read_root():
+    return {"message": "Hello world!"}
