@@ -8,9 +8,7 @@ services:
       - ollama-data:/root/.ollama
     networks:
       - app-network
-    # runtime: nvidia   👈 Tạm thời comment dòng này lại để dễ debug không cần GPU
-    environment:
-      - OLLAMA_HOST=0.0.0.0
+    # runtime: nvidia   # Tùy bạn, chỉ bật khi cần GPU
 
   qdrant:
     container_name: qdrant-container
@@ -42,7 +40,11 @@ services:
     depends_on:
       - ollama
       - qdrant
-    # runtime: nvidia
+    env_file:
+      - .env
+    # hoặc, nếu bạn không dùng .env, hãy thêm:
+    # environment:
+    #   - OLLAMA_HOST=http://ollama-server-container:11434
 
   frontend:
     build:
@@ -64,143 +66,3 @@ networks:
 volumes:
   ollama-data:
   qdrant-data:
-
-
-
-
-
-# version: "3.9" # Version cua docker 
-
-# services: # list cac containers trong project can chay
-#   backend: 
-#     build:
-#       context: ./backend
-#       dockerfile: Dockerfile
-#     container_name: backend
-#     ports:
-#       - "8000:8000" # Port backend
-#     volumes: 
-#       - ./backend:/api # Mount thu muc backend vao container
-#     networks:
-#       - app-network
-#     extra_hosts:              
-#       - "host.docker.internal:host-gateway"
-
-#   frontend:
-#     build:
-#       context: ./frontend
-#       dockerfile: Dockerfile
-#     container_name: frontend
-#     ports:
-#       - "3000:3000" # Port frontend
-#     volumes:
-#     - ./frontend:/app
-#     - /app/node_modules
-#     networks:
-#       - app-network
-  
-#   ollama:
-#     build:
-#       context: ./ollama
-#     container_name: ollama-server
-#     image: ollama-server
-#     ports:
-#       - "11434:11434"
-#     volumes:
-#       - ollama-data:/root/.ollama
-#     networks:
-#       - app-network
-#     entrypoint: ["sh", "/pull.sh"]
-
-# # milvus vector database
-# # https://github.com/milvus-io/milvus/releases/download/v2.5.14/milvus-standalone-docker-compose.yml
-#   etcd:
-#     container_name: milvus-etcd
-#     image: quay.io/coreos/etcd:v3.5.18
-#     environment:
-#       - ETCD_AUTO_COMPACTION_MODE=revision
-#       - ETCD_AUTO_COMPACTION_RETENTION=1000
-#       - ETCD_QUOTA_BACKEND_BYTES=4294967296
-#       - ETCD_SNAPSHOT_COUNT=50000
-#     volumes:
-#       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/etcd:/etcd
-#     command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
-#     healthcheck:
-#       test: ["CMD", "etcdctl", "endpoint", "health"]
-#       interval: 30s
-#       timeout: 20s
-#       retries: 3
-#     networks:
-#       - app-network
-
-#   minio:
-#     container_name: milvus-minio
-#     image: minio/minio:RELEASE.2024-05-28T17-19-04Z
-#     environment:
-#       MINIO_ACCESS_KEY: minioadmin
-#       MINIO_SECRET_KEY: minioadmin
-#     ports:
-#       - "9001:9001"
-#       - "9000:9000"
-#     volumes:
-#       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
-#     command: minio server /minio_data --console-address ":9001"
-#     healthcheck:
-#       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-#       interval: 30s
-#       timeout: 20s
-#       retries: 3
-#     networks:
-#       - app-network
-
-#   standalone:
-#     container_name: milvus-standalone
-#     image: milvusdb/milvus:v2.5.14
-#     command: ["milvus", "run", "standalone"]
-#     security_opt:
-#       - seccomp:unconfined
-#     environment:
-#       MINIO_REGION: us-east-1
-#       ETCD_ENDPOINTS: etcd:2379
-#       MINIO_ADDRESS: minio:9000
-#     volumes:
-#       - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-#     healthcheck:
-#       test: ["CMD", "curl", "-f", "http://localhost:9091/healthz"]
-#       interval: 30s
-#       start_period: 90s
-#       timeout: 20s
-#       retries: 3
-#     ports:
-#       - "19530:19530"
-#       - "9091:9091"
-#     depends_on:
-#       - "etcd"
-#       - "minio"
-#     networks:
-#       - app-network
-
-#   # Attu - GUI for Milvus
-#   # https://github.com/zilliztech/attu/blob/main/docker-compose.yml
-#   attu:
-#     container_name: milvus-attu
-#     image: zilliz/attu:v2.5
-#     environment:
-#       MILVUS_URL: milvus:19530
-#     ports:
-#       - "8001:3000"
-#     depends_on:
-#       - "standalone"
-#     networks:
-#       - app-network
-
-# networks:
-#   app-network:
-#     driver: bridge # bridge network la mang noi bo (virtual network) tren cung may host de ket noi cac container voi nhau
-
-# volumes:
-#   ollama-data:
-#   # Thêm volume lưu trữ dữ liệu cho milvus
-#   milvus-data:
-#   etcd-data:
-#   minio-data:

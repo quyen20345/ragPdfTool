@@ -9,6 +9,17 @@ class DataChat(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True, index=True)
     prompt: str
     result: str
+    
+    
+# ----------------------------
+# Define Document Table Schema
+# ----------------------------
+class Document(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True, index=True)
+    filename: str
+    file_path: str
+    vector_path: str
+
 
 # ----------------------------
 # Setup SQLite Database

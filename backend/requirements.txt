@@ -2,22 +2,25 @@ fastapi
 uvicorn
 python-dotenv
 sqlmodel
+python-multipart
 
 # LangChain core + community + integration
 langchain
 langchain-community
 langchain-ollama
 langchain-huggingface
+langchain-qdrant
 
 # Embedding, Transformers
 transformers
 sentence-transformers
 torch
 
-# FAISS for vector store
-faiss-cpu
+# Qdrant client for vector store
+qdrant-client
 
 # Ollama Python client
 ollama
 
+# PDF loader
 pypdf

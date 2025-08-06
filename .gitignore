@@ -8,4 +8,4 @@
 /backend/app/milvus_pdf_rag/data
 /backend/app/faiss_pdf_rag/vectorstores/db_faiss/index.faiss
 /backend/app/faiss_pdf_rag/vectorstores/db_faiss/index.pkl
-/backend/.env
+.env

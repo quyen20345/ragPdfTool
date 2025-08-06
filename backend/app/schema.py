@@ -7,12 +7,12 @@ from typing import Optional, List
 # ----------------------------
 class ChatRequest(BaseModel):
     prompt: str = Field(
-        default="How to write a Python function?",
-        description="User's input question"
+        default="Tóm tắt context cho tôi?",
+        description="đây là câu hỏi hoặc yêu cầu của người dùng"
     )
     context: Optional[str] = Field(
         default=None,
-        description="Optional pre-context for the model"
+        description="Ngữ cảnh tùy chọn cho mô hình"
     )
 
 
