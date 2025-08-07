@@ -1,26 +1,32 @@
+# backend/requirements.txt
 fastapi
 uvicorn
-python-dotenv
-sqlmodel
 python-multipart
+sqlalchemy
+psycopg2-binary
+alembic
 
-# LangChain core + community + integration
+# LangChain
 langchain
 langchain-community
-langchain-ollama
-langchain-huggingface
-langchain-qdrant
 
-# Embedding, Transformers
-transformers
-sentence-transformers
-torch
-
-# Qdrant client for vector store
+# Vector DB
 qdrant-client
 
-# Ollama Python client
+# ML/Embeddings
+sentence-transformers
+torch
+transformers
+
+# PDF processing
+pypdf
+pdfplumber
+
+# Ollama
 ollama
 
-# PDF loader
-pypdf
+# Utilities
+python-dotenv
+requests
+numpy
+pandas

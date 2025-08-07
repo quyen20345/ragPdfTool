@@ -8,11 +8,16 @@ services:
       - ollama-data:/root/.ollama
     networks:
       - app-network
-    # runtime: nvidia   # Tùy bạn, chỉ bật khi cần GPU
+    # Comment healthcheck vì container Ollama không có curl
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:11434/api/version"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
 
   qdrant:
     container_name: qdrant-container
-    image: qdrant/qdrant:v1.15-gpu-nvidia
+    image: qdrant/qdrant:v1.15.0
     ports:
       - "6333:6333"
       - "6334:6334"
@@ -20,44 +25,92 @@ services:
       - qdrant-data:/qdrant/storage
     networks:
       - app-network
-    # runtime: nvidia
-    # Nếu không cần GPU thì có thể đổi image:
-    # image: qdrant/qdrant:v1.15.0
+    # Comment healthcheck vì curl không chắc có trong container qdrant
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+
+  postgres:
+    container_name: postgres-container
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-raguser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ragpassword}
+      POSTGRES_DB: ${POSTGRES_DB:-ragdatabase}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    # Healthcheck postgres dùng pg_isready, nên để nguyên
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-raguser}"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
 
   backend: 
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: backend
+    container_name: backend-container
     ports:
       - "8000:8000"
     volumes: 
-      - ./backend:/home/backend
+      - ./backend:/app
+      # - backend-uploads:/app/vectordb/data
     networks:
       - app-network
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    # depends_on:
+    #   ollama:
+    #     condition: service_healthy
+    #   qdrant:
+    #     condition: service_healthy
+    #   postgres:
+    #     condition: service_healthy
     depends_on:
       - ollama
       - qdrant
+      - postgres
+
     env_file:
       - .env
-    # hoặc, nếu bạn không dùng .env, hãy thêm:
-    # environment:
-    #   - OLLAMA_HOST=http://ollama-server-container:11434
+    environment:
+      - POSTGRES_HOST=postgres-container
+      - QDRANT_HOST=qdrant-container
+      - OLLAMA_BASE_URL=http://ollama-server-container:11434
+    # Healthcheck backend dùng curl có thể ok nếu container backend có curl, nếu không thì comment hoặc sửa
+    # Nếu backend container có curl thì giữ, nếu không thì comment
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: frontend-container
     ports:
       - "3000:3000"
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      # - /app/node_modules
     networks:
       - app-network
+    # depends_on:
+      # backend:
+      #   condition: service_healthy
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
 
 networks:
   app-network:
@@ -66,3 +119,5 @@ networks:
 volumes:
   ollama-data:
   qdrant-data:
+  postgres-data:
+  backend-uploads:

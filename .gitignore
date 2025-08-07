@@ -1,11 +1,58 @@
-/backend/venv
-/backend/rag_model
-/backend/__pycache__
-/backend/app/__pycache__
-/backend/app/data
-/volumes
-/backend/app/faiss_pdf_rag/models/all-MiniLM-L6-v2-f16.gguf
-/backend/app/milvus_pdf_rag/data
-/backend/app/faiss_pdf_rag/vectorstores/db_faiss/index.faiss
-/backend/app/faiss_pdf_rag/vectorstores/db_faiss/index.pkl
+# === Hệ điều hành ===
+.DS_Store
+Thumbs.db
+
+# === Python ===
+# Byte-compiled / optimized / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# File môi trường
 .env
+.env.*.local
+
+# Thư mục dữ liệu nội bộ (Qdrant, vectordb…)
+backend/vectordb/data/
+
+# === Node / Frontend ===
+# Thư mục dependencies
+node_modules/
+frontend/node_modules/
+
+# Build output
+dist/
+build/
+
+# NPM / Yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Docker ===
+# Nếu bạn dùng override compose
+docker-compose.override.yml
+# Cả Dockerfile phụ
+Dockerfile*
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.suo
+*.user
+*.cache
+
+# === Logs & Temporary ===
+*.log
+*.tmp
+*.bak
+
+# === Coverage Reports ===
+coverage/
+htmlcov/

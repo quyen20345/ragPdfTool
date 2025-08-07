@@ -1,113 +1,69 @@
-import React, { useState } from "react";
-import axios from "axios";
-import ChatWindow from "./components/ChatWindow";
+// frontend/src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { FileText, MessageSquare, Activity } from 'lucide-react';
+import DocumentManager from './components/DocumentManager';
+import ChatInterface from './components/ChatInterface';
+import HealthDashboard from './components/HealthDashboard';
+import './index.css';
 
-function App() {
-  const [messages, setMessages] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
+const Navigation = () => {
+  const location = useLocation();
+  
+  const navItems = [
+    { path: '/', icon: MessageSquare, label: 'Trò chuyện', exact: true },
+    { path: '/documents', icon: FileText, label: 'Quản lý tài liệu' },
+    { path: '/health', icon: Activity, label: 'Trạng thái hệ thống' }
+  ];
 
-const sendMessage = async (userMessage) => {
-  // Chỉ thêm user message 1 lần
-  const userMsg = { sender: "user", text: userMessage };
-  setMessages((prev) => [...prev, userMsg]);
-  setIsTyping(true);
-
-  try {
-    const response = await axios.post("/prompt", {
-      prompt: userMessage,
-      context: "",
-    });
-
-    const data = response.data;
-    const botMsg = { sender: "bot", text: data.result };
-
-    setMessages((prev) => [...prev, botMsg]); // chỉ thêm bot message
-  } catch (error) {
-    console.error("Lỗi gửi tin nhắn:", error);
-    setMessages((prev) => [
-      ...prev,
-      { sender: "bot", text: "Đã xảy ra lỗi khi phản hồi." },
-    ]);
-  }
-
-  setIsTyping(false);
+  return (
+    <nav className="bg-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center space-x-4">
+            <h1 className="text-xl font-bold text-gray-800">RAG PDF System</h1>
+          </div>
+          <div className="flex space-x-4">
+            {navItems.map(({ path, icon: Icon, label, exact }) => {
+              const isActive = exact 
+                ? location.pathname === path 
+                : location.pathname.startsWith(path);
+              
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-blue-100 text-blue-700'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  }`}
+                >
+                  <Icon className="h-4 w-4 mr-2" />
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 };
 
-
-  return <ChatWindow messages={messages} onSend={sendMessage} isTyping={isTyping} />;
-}
+const App = () => {
+  return (
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<ChatInterface />} />
+          <Route path="/documents" element={<DocumentManager />} />
+          <Route path="/health" element={<HealthDashboard />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
 
 export default App;
-
-
-
-// // src/App.js
-// import React, { useState } from "react";
-// import axios from "axios";
-
-// function App() {
-//   const [prompt, setPrompt] = useState("");
-//   const [result, setResult] = useState("");
-//   const [loading, setLoading] = useState(false);
-
-//   const handleSubmit = async () => {
-//     setLoading(true);
-//     try {
-//       const response = await axios.post("/prompt", {
-//         prompt: prompt,
-//         context: "" // hoặc bạn có thể thêm context nếu có
-//       });
-//       setResult(response.data.result);
-//     } catch (error) {
-//       console.error(error);
-//       setResult("Error occurred!");
-//     }
-//     setLoading(false);
-//   };
-
-//   return (
-//     <div style={{ padding: 30 }}>
-//       <h2>🧠 Ask AI</h2>
-//       <textarea
-//         rows={4}
-//         cols={60}
-//         value={prompt}
-//         onChange={(e) => setPrompt(e.target.value)}
-//         placeholder="Enter your question..."
-//       />
-//       <br />
-//       <button onClick={handleSubmit} disabled={loading}>
-//         {loading ? "Thinking..." : "Submit"}
-//       </button>
-
-//       <h3>💬 Response:</h3>
-//       <div style={{ whiteSpace: "pre-wrap", border: "1px solid #ccc", padding: 10 }}>
-//         {result}
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
-// // import './App.css';
-// // import axios from 'axios';
-// // import { useState, useEffect } from 'react'; // la 2 React Hooks: quan ly state(trang thai du lieu) trong component va xu ly side effects(goi api, dk su kien,...)
-
-// // function App() {
-// //   const [people, setPeople] = useState([]); 
-// //   useEffect(()=> {
-// //     axios.get('/api').then(res => setPeople(res.data));
-// //   }, [])
-
-// //   return people.map((p, index) => {
-// //     return <p key={index}>{p.id} - {p.name} - {p.age}</p>
-// //   });
-  
-// // }
-
-// // export default App;
-
-
