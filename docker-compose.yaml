@@ -53,6 +53,19 @@ services:
     #   interval: 30s
     #   timeout: 10s
     #   retries: 3
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin-container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@domain.com   # email đăng nhập
+      PGADMIN_DEFAULT_PASSWORD: secret_password # mật khẩu đăng nhập
+    ports:
+      - "5050:80"                               # truy cập web tại http://localhost:5050
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin           # lưu dữ liệu cấu hình
+    networks:
+      - app-network
 
   backend: 
     build:
@@ -120,4 +133,5 @@ volumes:
   ollama-data:
   qdrant-data:
   postgres-data:
+  pgadmin-data:
   backend-uploads:
