@@ -1,6 +1,7 @@
 services:
+# neu bo container_name thi default: <project_name>_<service_name>_<số_thứ_tự>
   ollama:
-    container_name: ollama-server-container
+    # container_name: ollama-server-container
     image: ollama/ollama
     ports:
       - "11434:11434"
@@ -8,55 +9,41 @@ services:
       - ollama-data:/root/.ollama
     networks:
       - app-network
-    # Comment healthcheck vì container Ollama không có curl
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:11434/api/version"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
 
   qdrant:
-    container_name: qdrant-container
+    # container_name: qdrant-container
     image: qdrant/qdrant:v1.15.0
     ports:
-      - "6333:6333"
-      - "6334:6334"
+      - "6333:6333" # http api
+      - "6334:6334" # gRPC api 
     volumes:
       - qdrant-data:/qdrant/storage
     networks:
       - app-network
-    # Comment healthcheck vì curl không chắc có trong container qdrant
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:6333/health"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
 
   postgres:
-    container_name: postgres-container
+    # container_name: postgres-container
     image: postgres:15
-    restart: unless-stopped
+    restart: unless-stopped # auto restarting when the service is error.
     environment:
+    # ${VAR:-default_value}: get VAR if exist else return default_value.
       POSTGRES_USER: ${POSTGRES_USER:-raguser}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ragpassword}
       POSTGRES_DB: ${POSTGRES_DB:-ragdatabase}
     volumes:
+      # /docker-entrypoint-initdb.d/ is a special location in container.
+      # if the service runs for the first time, then container will check /docker-entrypoint-initdb.d/ for .sql file and execute them.
+      # else if postgress-data already exists, the service will skip executin .sql files in /docker-entrypoint-initdb.d/.
       - postgres-data:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     ports:
       - "5432:5432"
     networks:
       - app-network
-    # Healthcheck postgres dùng pg_isready, nên để nguyên
-    # healthcheck:
-    #   test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-raguser}"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
   
   pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: pgadmin-container
+    # container_name: pgadmin-container
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@domain.com   # email đăng nhập
       PGADMIN_DEFAULT_PASSWORD: secret_password # mật khẩu đăng nhập
@@ -64,14 +51,17 @@ services:
       - "5050:80"                               # truy cập web tại http://localhost:5050
     volumes:
       - pgadmin-data:/var/lib/pgadmin           # lưu dữ liệu cấu hình
+      - .servers.json:/pgadmin4/servers.json
     networks:
       - app-network
+    depends_on:
+      - postgres # dam bao postgres duoc khoi dong truoc pgadmin
 
   backend: 
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: backend-container
+    # container_name: backend-container
     ports:
       - "8000:8000"
     volumes: 
@@ -79,51 +69,41 @@ services:
       # - backend-uploads:/app/vectordb/data
     networks:
       - app-network
-    # depends_on:
-    #   ollama:
-    #     condition: service_healthy
-    #   qdrant:
-    #     condition: service_healthy
-    #   postgres:
-    #     condition: service_healthy
     depends_on:
       - ollama
       - qdrant
       - postgres
 
-    env_file:
-      - .env
-    environment:
-      - POSTGRES_HOST=postgres-container
-      - QDRANT_HOST=qdrant-container
-      - OLLAMA_BASE_URL=http://ollama-server-container:11434
-    # Healthcheck backend dùng curl có thể ok nếu container backend có curl, nếu không thì comment hoặc sửa
-    # Nếu backend container có curl thì giữ, nếu không thì comment
-    # healthcheck:
-    #   test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
+    env_file: # neu su dung environment se ghi de len env_file neu trung gia tri
+      - ./backend/.env 
+    # environment: # ghi de len .env neu bien khai bao trung nhau.
+    #   - POSTGRES_HOST=postgres
+    #   - QDRANT_HOST=qdrant
+    #   - OLLAMA_BASE_URL=http://ollama-server-container:11434
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: frontend-container
+    # container_name: frontend-container
     ports:
       - "3000:3000"
     volumes:
+    # we create an empty folder at /app/note_modules 
+    # because:
+    # 1. when this service runs in the first time, node_modules doesn't exist, so all folders from host will be mounted to container.
+    # 2. later, node_models is created by npm inside container, but without this volume mapping, it would be overwritten and disappear due to the bind mount.
       - ./frontend:/app
-      # - /app/node_modules
+      - /app/node_modules 
     networks:
       - app-network
-    # depends_on:
-      # backend:
-      #   condition: service_healthy
     depends_on:
       - backend
-    environment:
-      - REACT_APP_API_URL=http://localhost:8000
+    env_file:
+      - ./frontend/.env.development
+      - ./frontend/.env.production
+    # environment:
+    #   - REACT_APP_API_URL=http://localhost:8000
 
 networks:
   app-network:
