@@ -20,7 +20,8 @@ POSTGRES_HOST=postgres
 POSTGRES_PORT=5432
 
 # Ollama
-OLLAMA_MODEL=llama2
+# OLLAMA_MODEL=llama2
+OLLAMA_MODEL=mrjacktung/phogpt-4b-chat-gguf
 OLLAMA_BASE_URL=http://ollama:11434
 
 # Qdrant
@@ -74,6 +75,7 @@ echo "   🌐 Frontend: http://localhost:3000"
 echo "   🔗 Backend API: http://localhost:8000"
 echo "   📊 API Docs:   http://localhost:8000/docs"
 echo "   🗄️ Qdrant UI:  http://localhost:6333/dashboard"
+echo "   pgadmin4: http://localhost:5050"
 echo ""
 echo "📝 To stop: docker compose down"
 echo "🔧 Logs:   docker compose logs -f [service]"
