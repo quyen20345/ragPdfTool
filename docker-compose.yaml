@@ -51,7 +51,8 @@ services:
       - "5050:80"                               # truy cập web tại http://localhost:5050
     volumes:
       - pgadmin-data:/var/lib/pgadmin           # lưu dữ liệu cấu hình
-      - .servers.json:/pgadmin4/servers.json
+      - ./servers.json:/pgadmin4/servers.json:ro
+    user: "5050:5050"
     networks:
       - app-network
     depends_on:
