@@ -1,5 +1,3 @@
-# =====================================
-# README.md (update for the project)
 # RAG PDF System
 
 Hệ thống hỏi đáp thông minh với tài liệu PDF sử dụng RAG (Retrieval-Augmented Generation).
