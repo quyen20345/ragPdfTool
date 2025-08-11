@@ -1,5 +1,5 @@
 # backend/app/services/llm_service.py
-from langchain.llms import Ollama
+from langchain_ollama import OllamaLLM # from langchain.llms import Ollama
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from app.services.vector_service import VectorService
@@ -7,7 +7,7 @@ from app.core.config import settings
 
 class LLMService:
     def __init__(self):
-        self.llm = Ollama(
+        self.llm = OllamaLLM(
             model=settings.OLLAMA_MODEL,
             base_url=settings.OLLAMA_BASE_URL,
             temperature=0.7,

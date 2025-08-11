@@ -4,8 +4,8 @@ from pathlib import Path
 from typing import List, Dict, Any
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Qdrant
+from langchain_huggingface import HuggingFaceEmbeddings # from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_qdrant import QdrantVectorStore # from langchain_community.vectorstores import Qdrant
 from langchain.schema import Document
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance, Filter, FieldCondition, MatchValue, FilterSelector
@@ -39,9 +39,9 @@ class VectorService:
             print(f"Error ensuring collection: {e}")
             raise
     
-    def get_vectorstore(self) -> Qdrant:
-        """Get Qdrant vectorstore using the new Qdrant class"""
-        return Qdrant(
+    def get_vectorstore(self) -> QdrantVectorStore:
+        """Get QdrantVectorStore vectorstore using the new Qdrant class"""
+        return QdrantVectorStore(
             client=self.qdrant_client,
             collection_name=settings.COLLECTION_NAME,
             embeddings=self.embeddings,
