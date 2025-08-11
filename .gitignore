@@ -17,9 +17,11 @@ venv/
 # File môi trường
 .env
 .env.*.local
+.env.development
+.env.production
 
 # Thư mục dữ liệu nội bộ (Qdrant, vectordb…)
-backend/vectordb/data/
+backend/app/vectordb/data/
 
 # === Node / Frontend ===
 # Thư mục dependencies
