@@ -9,6 +9,9 @@ alembic
 # LangChain
 langchain
 langchain-community
+langchain-huggingface  # New package for HuggingFace embeddings
+langchain-ollama       # New package for Ollama LLM
+langchain-qdrant       # New package for Qdrant integration
 
 # Vector DB
 qdrant-client
@@ -17,6 +20,7 @@ qdrant-client
 sentence-transformers
 torch
 transformers
+huggingface_hub        # Required for langchain-huggingface
 
 # PDF processing
 pypdf
