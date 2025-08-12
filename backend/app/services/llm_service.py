@@ -62,7 +62,7 @@ class LLMService:
             }
         
         qa_chain = self.create_rag_chain(temperature)
-        result = qa_chain({"query": question})
+        result = qa_chain.invoke({"query": question}) # langchain da deprecate __call__ tu 0.1.0, nen dung invoke de tranh loi va wearing
         return result
     
     def test_connection(self):

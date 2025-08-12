@@ -1,3 +1,4 @@
+# backend/app/models/models.py
 from sqlalchemy import Column, Integer, String, DateTime, Text, Boolean, ForeignKey
 from sqlalchemy.sql import func
 from app.db.database import Base

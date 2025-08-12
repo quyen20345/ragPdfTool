@@ -28,6 +28,9 @@ class DocumentService:
         unique_filename = f"{uuid.uuid4()}{file_extension}"
         file_path = settings.UPLOAD_DIR / unique_filename
         
+        # Initialize db_document to None for proper cleanup
+        db_document = None
+        
         try:
             # Save file
             with open(file_path, "wb") as f:
@@ -53,7 +56,7 @@ class DocumentService:
             db.commit()
             db.refresh(db_document)
             
-            return DocumentResponse.from_orm(db_document)
+            return DocumentResponse.model_validate(db_document)  # Updated for Pydantic v2
             
         except Exception as e:
             # Cleanup on error

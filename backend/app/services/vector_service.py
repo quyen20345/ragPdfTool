@@ -44,7 +44,7 @@ class VectorService:
         return QdrantVectorStore(
             client=self.qdrant_client,
             collection_name=settings.COLLECTION_NAME,
-            embeddings=self.embeddings,
+            embedding=self.embeddings, # QdrantVectorStore su dung keyword argument embedding: Embeddings
         )
     
     def process_pdf(self, file_path: str, filename: str) -> int:
