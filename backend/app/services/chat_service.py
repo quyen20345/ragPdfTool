@@ -49,4 +49,4 @@ class ChatService:
         messages = db.query(ChatMessage).filter(
             ChatMessage.session_id == session_id
         ).order_by(ChatMessage.created_at.asc()).all()
-        return [ChatMessageResponse.from_orm(msg) for msg in messages]
+        return [ChatMessageResponse.model_validate(msg) for msg in messages]
