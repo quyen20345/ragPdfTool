@@ -13,8 +13,8 @@ if [ ! -f ./backend/.env ]; then
   echo "📝 Creating ./backend/.env ..."
   cat > ./backend/.env << 'EOL'
 # Database
-POSTGRES_USER=raguser
-POSTGRES_PASSWORD=ragpassword
+POSTGRES_USER=user001
+POSTGRES_PASSWORD=12345678
 POSTGRES_DB=ragdatabase
 POSTGRES_HOST=postgres
 POSTGRES_PORT=5432

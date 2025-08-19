@@ -8,6 +8,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
+backend/models_cache
+backend/app/__pycache__
 
 # Virtual environments
 env/
@@ -58,3 +60,9 @@ Dockerfile*
 # === Coverage Reports ===
 coverage/
 htmlcov/
+
+# === test ===
+requirements.example.txt
+.env.example
+usecase.txt 
+

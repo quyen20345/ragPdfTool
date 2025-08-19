@@ -1,37 +1,37 @@
 # backend/requirements.txt
-fastapi
-uvicorn
-python-multipart
-sqlalchemy
-psycopg2-binary
-alembic
-pydantic==2.x.y
+fastapi==0.116.1
+uvicorn==0.35.0
+python-multipart==0.0.20
+sqlalchemy==2.0.43
+psycopg2-binary==2.9.10
+alembic==1.16.4
+pydantic==2.11.7
 
 # LangChain
-langchain
-langchain-community
-langchain-huggingface  # New package for HuggingFace embeddings
-langchain-ollama       # New package for Ollama LLM
-langchain-qdrant       # New package for Qdrant integration
+langchain==0.3.27
+langchain-community==0.3.27
+langchain-huggingface==0.3.1  # New package for HuggingFace embeddings
+langchain-ollama==0.3.6       # New package for Ollama LLM
+langchain-qdrant==0.2.0       # New package for Qdrant integration
 
 # Vector DB
-qdrant-client
+qdrant-client==1.15.1
 
 # ML/Embeddings
-sentence-transformers
-torch
-transformers
-huggingface_hub        # Required for langchain-huggingface
+sentence-transformers==5.1.0
+torch==2.8.0
+transformers==4.55.0
+huggingface_hub==0.34.4        # Required for langchain-huggingface
 
 # PDF processing
-pypdf
-pdfplumber
+pypdf==6.0.0
+pdfplumber==0.11.7
 
 # Ollama
-ollama
+ollama==0.5.3
 
 # Utilities
-python-dotenv
-requests
-numpy
-pandas
+python-dotenv==1.1.1
+requests==2.32.4
+numpy==2.3.2
+pandas==2.3.1

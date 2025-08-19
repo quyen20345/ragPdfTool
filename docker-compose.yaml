@@ -27,8 +27,8 @@ services:
     restart: unless-stopped # auto restarting when the service is error.
     environment:
     # ${VAR:-default_value}: get VAR if exist else return default_value.
-      POSTGRES_USER: ${POSTGRES_USER:-raguser}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ragpassword}
+      POSTGRES_USER: ${POSTGRES_USER:-user001} # ${POSTGRES_USER:-raguser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-12345678} # ${POSTGRES_PASSWORD:-ragpassword}
       POSTGRES_DB: ${POSTGRES_DB:-ragdatabase}
     volumes:
       # /docker-entrypoint-initdb.d/ is a special location in container.
@@ -46,7 +46,7 @@ services:
     # container_name: pgadmin-container
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@domain.com   # email đăng nhập
-      PGADMIN_DEFAULT_PASSWORD: secret_password # mật khẩu đăng nhập
+      PGADMIN_DEFAULT_PASSWORD: 88888888 # secret_password # mật khẩu đăng nhập
     ports:
       - "5050:80"                               # truy cập web tại http://localhost:5050
     volumes:
